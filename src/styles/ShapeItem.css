@@ -10,18 +10,18 @@
   height: auto;
 }
 
-/* .shape-controls {
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  margin-top: 4px;
+.shape-tools {
+  position: absolute;
+  top: -30px; /* above the shape */
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 1px solid #ccc;
+  padding: 4px;
+  border-radius: 4px;
   display: flex;
   gap: 4px;
-} */
-
-/* .shape-wrapper:hover .shape-controls {
-  opacity: 1;
 }
-
-.shape-wrapper {
-  transform-origin: center center;
-} */
+.shape-tools button {
+  cursor: pointer;
+}
