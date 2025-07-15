@@ -1,0 +1,27 @@
+.shape-wrapper {
+  position: absolute;
+  cursor: grab;
+  display: inline-block;
+}
+
+.shape-svg {
+  display: block;
+  width: auto;
+  height: auto;
+}
+
+/* .shape-controls {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  margin-top: 4px;
+  display: flex;
+  gap: 4px;
+} */
+
+/* .shape-wrapper:hover .shape-controls {
+  opacity: 1;
+}
+
+.shape-wrapper {
+  transform-origin: center center;
+} */
