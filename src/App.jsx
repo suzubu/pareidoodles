@@ -1,6 +1,7 @@
 import { useState } from "react";
 import shapeList from "./data/shapeList";
 import ShapeItem from "./Components/ShapeItem";
+import ScreenshotButton from "./Components/ScreenshotButton";
 
 function App() {
   const [shapeOrder, setShapeOrder] = useState(
@@ -15,27 +16,30 @@ function App() {
   };
 
   return (
-    <div
-      className="App"
-      style={{
-        width: "100vw",
-        height: "100vh",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      {shapeOrder.map((shape) => (
-        <ShapeItem
-          key={shape.id}
-          id={shape.id}
-          initialX={shape.initialX}
-          initialY={shape.initialY}
-          zIndex={shape.zIndex}
-          onBringToFront={() => bringToFront(shape.id)}
-        >
-          <shape.Component className="shape-svg" />
-        </ShapeItem>
-      ))}
+    <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
+      <ScreenshotButton /> {/* ✅ lives outside the .App container */}
+      <div
+        className="App"
+        style={{
+          width: "100vw",
+          height: "100vh",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {shapeOrder.map((shape) => (
+          <ShapeItem
+            key={shape.id}
+            id={shape.id}
+            initialX={shape.initialX}
+            initialY={shape.initialY}
+            zIndex={shape.zIndex}
+            onBringToFront={() => bringToFront(shape.id)}
+          >
+            <shape.Component className="shape-svg" />
+          </ShapeItem>
+        ))}
+      </div>
     </div>
   );
 }

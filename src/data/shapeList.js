@@ -5,6 +5,10 @@ import { ReactComponent as BluePent } from "../assets/shapes/blue-pentagon.svg";
 import { ReactComponent as Green1 } from "../assets/shapes/green-shape1.svg";
 import { ReactComponent as PurpSq } from "../assets/shapes/purple-squiggle.svg";
 import { ReactComponent as YellowStar } from "../assets/shapes/yellow-star.svg";
+
+const padding = 50;
+const shapeSize = 100;
+
 const shapeList = [
   { id: "pinkRec", Component: PinkRec },
   { id: "redCirc", Component: RedCirc },
@@ -16,8 +20,14 @@ const shapeList = [
   // add more shapes here…
 ].map((shape) => ({
   ...shape,
-  initialX: Math.random() * 800 + 100,
-  initialY: Math.random() * 500 + 100,
+  initialX:
+    Math.random() * (window.innerWidth - shapeSize - padding * 2) +
+    padding +
+    shapeSize / 2,
+  initialY:
+    Math.random() * (window.innerHeight - shapeSize - padding * 2) +
+    padding +
+    shapeSize / 2,
   initialRotation: 0,
 }));
 
