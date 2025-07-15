@@ -1,0 +1,19 @@
+.outer-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.selection-box {
+  position: absolute;
+  background: rgba(0, 120, 255, 0.2);
+  border: 1px dashed #0078ff;
+  pointer-events: none;
+  z-index: 9998;
+}

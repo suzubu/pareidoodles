@@ -1,5 +1,4 @@
 .shape-wrapper {
-  /* position: absolute; */
   cursor: grab;
   display: inline-block;
 }
@@ -11,26 +10,33 @@
 }
 
 .shape-tools {
-  background: #222; /* your new background */
-
-  border-radius: 6px;
-  padding: 6px;
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  border-radius: 4px;
+  padding: 4px;
   display: flex;
-  gap: 6px;
-  /* you can also add box-shadow, transitions, etc. */
+  gap: 4px;
 }
 .shape-tools button {
-  background: #222; /* new background color */
+  background: #222;
   border: none;
   cursor: pointer;
   font-size: 18px;
   padding: 6px;
-  border-radius: 4px; /* match panel rounding */
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .shape-tools button:hover {
-  background: #666; /* slightly lighter or darker on hover */
+  background: #666;
   border-radius: 4px;
+}
+
+.shape-container.selected .shape-wrapper {
+  outline: 2px dashed #00f;
+  outline-offset: 4px;
 }

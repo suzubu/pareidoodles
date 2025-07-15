@@ -1,3 +1,4 @@
+// --- Imports ---
 import { useState, useRef, useEffect } from "react";
 import "../styles/ShapeItem.css";
 import { motion, useMotionValue } from "framer-motion";
@@ -8,22 +9,39 @@ import {
   UilMinusCircle,
 } from "@iconscout/react-unicons";
 
+// --- Component Definition ---
 export default function ShapeItem({
   id,
   initialX,
   initialY,
+  rotation,
+  scale,
+  onTransformSelected,
   children,
   zIndex,
   onBringToFront,
+  isSelected,
+  onSelect,
+  onMoveSelected,
+  onDragStart,
 }) {
+  // --- Motion Values for Position ---
   const x = useMotionValue(initialX);
   const y = useMotionValue(initialY);
-  const [showControls, setShowControls] = useState(false);
-  const [rotation, setRotation] = useState(0);
-  const [scale, setScale] = useState(1);
 
+  // --- Local State ---
+  const [showControls, setShowControls] = useState(false);
+
+  // --- Refs ---
   const panelRef = useRef(null);
 
+  // --- Effects for Position Updates ---
+  useEffect(() => {
+    x.set(initialX);
+    y.set(initialY);
+  }, [initialX, initialY, x, y]);
+
+  // --- Effect to Close Controls Panel on Outside Click ---
   useEffect(() => {
     function handleClickOutside(e) {
       if (panelRef.current && !panelRef.current.contains(e.target)) {
@@ -39,9 +57,14 @@ export default function ShapeItem({
     };
   }, [showControls]);
 
+  // --- Refs to Store Starting Position for Dragging ---
+  const startXRef = useRef(0);
+  const startYRef = useRef(0);
+
+  // --- Render ---
   return (
     <motion.div
-      className="shape-container"
+      className={`shape-container ${isSelected ? "selected" : ""}`}
       drag
       dragMomentum={false}
       style={{
@@ -51,8 +74,40 @@ export default function ShapeItem({
         cursor: "grab",
         zIndex: zIndex,
       }}
-      onPointerDown={onBringToFront}
+      onPointerDown={(e) => {
+        onBringToFront();
+        // only change selection if it's not already in selectedIds
+        if (!isSelected) {
+          onSelect(e.shiftKey);
+        }
+      }}
       onDoubleClick={() => setShowControls(true)}
+      onDragStart={() => {
+        // store starting position of this shape
+        startXRef.current = x.get();
+        startYRef.current = y.get();
+
+        // let App know to record starting positions of all selected shapes
+        if (onDragStart) {
+          onDragStart();
+        }
+      }}
+      onDrag={(event, info) => {
+        if (onMoveSelected) {
+          const dx = x.get() - startXRef.current;
+          const dy = y.get() - startYRef.current;
+          // live-update positions of all selected shapes
+          onMoveSelected(id, dx, dy, true);
+        }
+      }}
+      onDragEnd={() => {
+        const dx = x.get() - startXRef.current;
+        const dy = y.get() - startYRef.current;
+        if (onMoveSelected) {
+          // finalize positions of all selected shapes
+          onMoveSelected(id, dx, dy, false);
+        }
+      }}
     >
       <motion.div
         className="shape-wrapper"
@@ -65,34 +120,44 @@ export default function ShapeItem({
         {children}
       </motion.div>
 
+
       {showControls && (
         <div
           ref={panelRef}
           className="shape-tools"
           style={{
-            position: "absolute",
-            top: "-30px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            borderRadius: "4px",
-            padding: "4px",
-            display: "flex",
-            gap: "4px",
             zIndex: zIndex + 1,
           }}
         >
-          <button onClick={() => setRotation((r) => r - 15)}>
-            <UilArrowCircleLeft color="#f182f4" />
-          </button>
-          <button onClick={() => setRotation((r) => r + 15)}>
-            <UilArrowCircleRight color="#f182f4" />
-          </button>
-          <button onClick={() => setScale((s) => s + 0.1)}>
-            <UilPlusCircle color="#f182f4" />
-          </button>
-          <button onClick={() => setScale((s) => Math.max(0.1, s - 0.1))}>
-            <UilMinusCircle color="#f182f4" />
-          </button>
+          {[
+            {
+              type: "rotate",
+              delta: -15,
+              icon: <UilArrowCircleLeft color="#f182f4" />,
+            },
+            {
+              type: "rotate",
+              delta: 15,
+              icon: <UilArrowCircleRight color="#f182f4" />,
+            },
+            {
+              type: "scale",
+              delta: 0.1,
+              icon: <UilPlusCircle color="#f182f4" />,
+            },
+            {
+              type: "scale",
+              delta: -0.1,
+              icon: <UilMinusCircle color="#f182f4" />,
+            },
+          ].map(({ type, delta, icon }, index) => (
+            <button
+              key={index}
+              onClick={() => onTransformSelected(type, delta)}
+            >
+              {icon}
+            </button>
+          ))}
         </div>
       )}
     </motion.div>
