@@ -6,17 +6,59 @@ import "./styles/App.css";
 
 function App() {
   // --- State Setup ---
-  const [shapeOrder, setShapeOrder] = useState(
-    shapeList.map((shape, index) => ({
-      ...shape,
-      zIndex: index,
-      rotation: 0,
-      scale: 1,
-    }))
-  );
+  const margin = 5;
+  const placedShapes = [];
 
+  function generateInitialShapes() {
+    const shapeWidth = window.innerWidth < 600 ? 50 : 100;
+    const shapeHeight = window.innerWidth < 600 ? 50 : 100;
+
+    function getRandomPosition() {
+      const x =
+        Math.random() * (window.innerWidth - shapeWidth - margin * 2) + margin;
+      const y =
+        Math.random() * (window.innerHeight / 2 - shapeHeight - margin * 2) +
+        window.innerHeight / 2 +
+        margin;
+      return { x, y };
+    }
+
+    function isOverlapping(x, y) {
+      return placedShapes.some((pos) => {
+        const buffer = 5; // extra space between shapes
+        return !(
+          x + shapeWidth + buffer < pos.x ||
+          x > pos.x + shapeWidth + buffer ||
+          y + shapeHeight + buffer < pos.y ||
+          y > pos.y + shapeHeight + buffer
+        );
+      });
+    }
+
+    placedShapes.length = 0; // reset placedShapes
+
+    return shapeList.map((shape, index) => {
+      let pos;
+      let tries = 0;
+      do {
+        pos = getRandomPosition();
+        tries++;
+      } while (isOverlapping(pos.x, pos.y) && tries < 100);
+      placedShapes.push(pos);
+
+      return {
+        ...shape,
+        initialX: pos.x,
+        initialY: pos.y,
+        zIndex: index,
+        rotation: 0,
+        scale: window.innerWidth < 600 ? 0.25 : 0.5,
+      };
+    });
+  }
+
+  const [shapeOrder, setShapeOrder] = useState(() => generateInitialShapes());
   const [selectedIds, setSelectedIds] = useState([]);
-
   const [selectionBox, setSelectionBox] = useState(null);
   const [isSelecting, setIsSelecting] = useState(false);
 
@@ -148,6 +190,25 @@ function App() {
     );
   };
 
+  const duplicateSelected = () => {
+    setShapeOrder((prev) => {
+      const newShapes = [];
+      selectedIds.forEach((id) => {
+        const shape = prev.find((s) => s.id === id);
+        if (shape) {
+          newShapes.push({
+            ...shape,
+            id: shape.id + "-copy-" + Date.now() + Math.random(), // unique id
+            initialX: shape.initialX + 30, // offset to avoid perfect overlap
+            initialY: shape.initialY + 30,
+            zIndex: shape.zIndex + 1, // bring on top
+          });
+        }
+      });
+      return [...prev, ...newShapes];
+    });
+  };
+
   return (
     <div className="outer-container">
       <ScreenshotButton />
@@ -172,6 +233,7 @@ function App() {
             onDragStart={handleDragStart}
             onMoveSelected={moveSelectedShapes}
             onTransformSelected={transformSelected}
+            onDuplicateSelected={duplicateSelected}
           >
             <shape.Component className="shape-svg" />
           </ShapeItem>

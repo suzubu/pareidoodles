@@ -7,6 +7,7 @@ import {
   UilArrowCircleRight,
   UilPlusCircle,
   UilMinusCircle,
+  UilCopy,
 } from "@iconscout/react-unicons";
 
 // --- Component Definition ---
@@ -24,6 +25,7 @@ export default function ShapeItem({
   onSelect,
   onMoveSelected,
   onDragStart,
+  onDuplicateSelected,
 }) {
   // --- Motion Values for Position ---
   const x = useMotionValue(initialX);
@@ -120,7 +122,6 @@ export default function ShapeItem({
         {children}
       </motion.div>
 
-
       {showControls && (
         <div
           ref={panelRef}
@@ -158,6 +159,11 @@ export default function ShapeItem({
               {icon}
             </button>
           ))}
+
+          {/* ➕ Duplicate button */}
+          <button onClick={onDuplicateSelected} title="Duplicate">
+            <UilCopy color="#f182f4" />
+          </button>
         </div>
       )}
     </motion.div>
