@@ -6,12 +6,34 @@ import "./styles/App.css";
 
 function App() {
   // --- State Setup ---
-  const margin = 5;
   const placedShapes = [];
 
   function generateInitialShapes() {
-    const shapeWidth = window.innerWidth < 600 ? 50 : 100;
-    const shapeHeight = window.innerWidth < 600 ? 50 : 100;
+    const width = window.innerWidth;
+
+    let shapeWidth, shapeHeight, buffer, margin, scale;
+    if (width < 600) {
+      // Small screens
+      shapeWidth = 100;
+      shapeHeight = 100;
+      buffer = 50;
+      margin = 30;
+      scale = 0.5;
+    } else if (width < 1200) {
+      // Medium screens
+      shapeWidth = 120;
+      shapeHeight = 120;
+      buffer = 30;
+      margin = 25;
+      scale = 0.7;
+    } else {
+      // Large screens
+      shapeWidth = 150;
+      shapeHeight = 150;
+      buffer = 40;
+      margin = 20;
+      scale = 1;
+    }
 
     function getRandomPosition() {
       const x =
@@ -25,7 +47,6 @@ function App() {
 
     function isOverlapping(x, y) {
       return placedShapes.some((pos) => {
-        const buffer = 5; // extra space between shapes
         return !(
           x + shapeWidth + buffer < pos.x ||
           x > pos.x + shapeWidth + buffer ||
@@ -35,7 +56,7 @@ function App() {
       });
     }
 
-    placedShapes.length = 0; // reset placedShapes
+    placedShapes.length = 0;
 
     return shapeList.map((shape, index) => {
       let pos;
@@ -43,7 +64,7 @@ function App() {
       do {
         pos = getRandomPosition();
         tries++;
-      } while (isOverlapping(pos.x, pos.y) && tries < 100);
+      } while (isOverlapping(pos.x, pos.y) && tries < 2000);
       placedShapes.push(pos);
 
       return {
@@ -52,7 +73,9 @@ function App() {
         initialY: pos.y,
         zIndex: index,
         rotation: 0,
-        scale: window.innerWidth < 600 ? 0.25 : 0.5,
+        scaleX: scale,
+        scaleY: scale,
+        color: shape.defaultColor || undefined,
       };
     });
   }
@@ -150,7 +173,8 @@ function App() {
           if (type === "scale") {
             return {
               ...shape,
-              scale: Math.max(0.1, (shape.scale || 1) + delta),
+              scaleX: Math.max(0.1, (shape.scaleX || 1) + delta),
+              scaleY: Math.max(0.1, (shape.scaleY || 1) + delta),
             };
           }
         }
@@ -176,9 +200,7 @@ function App() {
       prev.map((shape) => {
         if (selectedIds.includes(shape.id)) {
           const start = dragStartPositions.current[shape.id];
-          if (!start) {
-            return shape;
-          }
+          if (!start) return shape;
           return {
             ...shape,
             initialX: start.x + dx,
@@ -190,6 +212,7 @@ function App() {
     );
   };
 
+  // --- Duplicate Shapes ---
   const duplicateSelected = () => {
     setShapeOrder((prev) => {
       const newShapes = [];
@@ -198,15 +221,53 @@ function App() {
         if (shape) {
           newShapes.push({
             ...shape,
-            id: shape.id + "-copy-" + Date.now() + Math.random(), // unique id
-            initialX: shape.initialX + 30, // offset to avoid perfect overlap
+            id: shape.id + "-copy-" + Date.now() + Math.random(),
+            initialX: shape.initialX + 30,
             initialY: shape.initialY + 30,
-            zIndex: shape.zIndex + 1, // bring on top
+            zIndex: shape.zIndex + 1,
           });
         }
       });
       return [...prev, ...newShapes];
     });
+  };
+
+  // --- Flip Shapes ---
+  const flipSelectedX = () => {
+    setShapeOrder((prev) =>
+      prev.map((shape) => {
+        if (selectedIds.includes(shape.id)) {
+          return {
+            ...shape,
+            scaleX: (shape.scaleX || 1) * -1,
+          };
+        }
+        return shape;
+      })
+    );
+  };
+
+  const flipSelectedY = () => {
+    setShapeOrder((prev) =>
+      prev.map((shape) => {
+        if (selectedIds.includes(shape.id)) {
+          return {
+            ...shape,
+            scaleY: (shape.scaleY || 1) * -1,
+          };
+        }
+        return shape;
+      })
+    );
+  };
+
+  const updateSelectedColor = (newColor) => {
+    console.log("🎨 Updating color to:", newColor, "for", selectedIds);
+    setShapeOrder((prev) =>
+      prev.map((shape) =>
+        selectedIds.includes(shape.id) ? { ...shape, color: newColor } : shape
+      )
+    );
   };
 
   return (
@@ -226,7 +287,8 @@ function App() {
             initialY={shape.initialY}
             zIndex={shape.zIndex}
             rotation={shape.rotation}
-            scale={shape.scale}
+            scaleX={shape.scaleX}
+            scaleY={shape.scaleY}
             isSelected={selectedIds.includes(shape.id)}
             onSelect={(multi) => toggleSelect(shape.id, multi)}
             onBringToFront={() => bringToFront(shape.id)}
@@ -234,8 +296,15 @@ function App() {
             onMoveSelected={moveSelectedShapes}
             onTransformSelected={transformSelected}
             onDuplicateSelected={duplicateSelected}
+            onFlipSelectedX={flipSelectedX}
+            onFlipSelectedY={flipSelectedY}
+            currentColor={shape.color}
+            onColorChange={updateSelectedColor}
           >
-            <shape.Component className="shape-svg" />
+            <shape.Component
+              className="shape-svg"
+              style={{ color: shape.color }}
+            />
           </ShapeItem>
         ))}
 

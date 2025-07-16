@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="120.332" height="66.285" viewBox="0 0 120.332 66.285">
   <g id="c" data-name="Layer 1">
-    <rect width="120.332" height="66.285" rx="9.586" ry="9.586" fill="#f182f4"/>
+    <rect width="120.332" height="66.285" rx="9.586" ry="9.586" fill="currentColor" />
   </g>
 </svg>

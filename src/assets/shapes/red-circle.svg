@@ -1,13 +1,8 @@
-<!-- <?xml version="1.0" encoding="UTF-8"?>
-<svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="94.938" height="94.938" viewBox="0 0 94.938 94.938">
-  <g id="c" data-name="Layer 1">
-    <circle cx="47.469" cy="47.469" r="47.469" fill="#f40000"/>
-  </g>
-</svg> -->
+
 
 
 <svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="94.938" height="94.938" viewBox="0 0 94.938 94.938" pointer-events="none">
   <g id="c" data-name="Layer 1">
-    <circle cx="47.469" cy="47.469" r="47.469" fill="#f40000" pointer-events="visiblePainted" />
+    <circle cx="47.469" cy="47.469" r="47.469" fill="currentColor" pointer-events="visiblePainted" />
   </g>
 </svg>

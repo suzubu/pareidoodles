@@ -8,6 +8,7 @@ import {
   UilPlusCircle,
   UilMinusCircle,
   UilCopy,
+  UilFlipV,
 } from "@iconscout/react-unicons";
 
 // --- Component Definition ---
@@ -16,7 +17,8 @@ export default function ShapeItem({
   initialX,
   initialY,
   rotation,
-  scale,
+  scaleX,
+  scaleY,
   onTransformSelected,
   children,
   zIndex,
@@ -26,6 +28,10 @@ export default function ShapeItem({
   onMoveSelected,
   onDragStart,
   onDuplicateSelected,
+  onFlipSelectedX,
+  onFlipSelectedY,
+  currentColor,
+  onColorChange,
 }) {
   // --- Motion Values for Position ---
   const x = useMotionValue(initialX);
@@ -33,6 +39,15 @@ export default function ShapeItem({
 
   // --- Local State ---
   const [showControls, setShowControls] = useState(false);
+  const [showColorMenu, setShowColorMenu] = useState(false);
+  const colorPalette = [
+    "#f182f4",
+    "#f40000",
+    "#00ff01",
+    "#003eed",
+    "#9146f2",
+    "#ffff11",
+  ];
 
   // --- Refs ---
   const panelRef = useRef(null);
@@ -75,6 +90,9 @@ export default function ShapeItem({
         position: "absolute",
         cursor: "grab",
         zIndex: zIndex,
+        scaleX: scaleX,
+        scaleY: scaleY,
+        transformOrigin: "center",
       }}
       onPointerDown={(e) => {
         onBringToFront();
@@ -115,7 +133,6 @@ export default function ShapeItem({
         className="shape-wrapper"
         style={{
           rotate: rotation,
-          scale: scale,
           transformOrigin: "center",
         }}
       >
@@ -164,6 +181,63 @@ export default function ShapeItem({
           <button onClick={onDuplicateSelected} title="Duplicate">
             <UilCopy color="#f182f4" />
           </button>
+
+          {/* 🔄 Flip buttons */}
+          <button onClick={onFlipSelectedX} title="Flip Horizontally">
+            <UilFlipV color="#f182f4" />
+          </button>
+          <button onClick={onFlipSelectedY} title="Flip Vertically">
+            <UilFlipV color="#f182f4" style={{ transform: "rotate(90deg)" }} />
+          </button>
+          <div style={{ position: "relative" }}>
+            <button
+              onClick={() => setShowColorMenu(!showColorMenu)}
+              style={{
+                width: "24px",
+                height: "24px",
+                borderRadius: "50%",
+                border: "2px solid #333",
+                backgroundColor: currentColor || "#ccc", // current color
+                cursor: "pointer",
+              }}
+            ></button>
+            {showColorMenu && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "30px",
+                  left: 0,
+                  background: "#fff",
+                  border: "1px solid #ccc",
+                  borderRadius: "4px",
+                  padding: "4px",
+                  display: "flex",
+                  gap: "4px",
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+                  zIndex: 1000,
+                }}
+              >
+                {colorPalette.map((col) => (
+                  <div
+                    key={col}
+                    onClick={() => {
+                      if (typeof onColorChange === "function")
+                        onColorChange(col);
+                      setShowColorMenu(false);
+                    }}
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      borderRadius: "50%",
+                      backgroundColor: col,
+                      border: "2px solid #333",
+                      cursor: "pointer",
+                    }}
+                  ></div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       )}
     </motion.div>

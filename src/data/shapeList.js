@@ -24,6 +24,15 @@ import { ReactComponent as YellowTri } from "../assets/shapes/yellow-triangle.sv
 
 // import {ReactComponent as } from "../assets/shapes/"
 
+const colorPalette = [
+  "#f182f4",
+  "#f40000",
+  "#00ff01",
+  "#003eed",
+  "#9146f2",
+  "#ffff11",
+];
+
 const padding = 50;
 const shapeSize = 100;
 
@@ -42,28 +51,46 @@ const shapeList = [
   { id: "green2", Component: Green2 },
   { id: "greenStar", Component: GreenStar },
   { id: "pinkBlob", Component: PinkBlob },
-  { id: "pinkSemi", Component: PinkSemi },
+  // { id: "pinkSemi", Component: PinkSemi },
   { id: "purpleBlob", Component: PurpleBlob },
   { id: "purpleTri", Component: PurpleTri },
   { id: "redRec", Component: RedRec },
   { id: "redTris", Component: RedTris },
   { id: "smallEye", Component: SmallEye },
   { id: "smallEyes", Component: SmallEyes },
-  { id: "yellowSemi", Component: YellowSemi },
+  // { id: "yellowSemi", Component: YellowSemi },
   { id: "yellowTri", Component: YellowTri },
 
   // add more shapes here…
-].map((shape) => ({
-  ...shape,
-  initialX:
-    Math.random() * (window.innerWidth - shapeSize - padding * 2) +
-    padding +
-    shapeSize / 2,
-  initialY:
-    Math.random() * (window.innerHeight - shapeSize - padding * 2) +
-    padding +
-    shapeSize / 2,
-  initialRotation: 0,
-}));
+].map((shape, index) => {
+  // shuffle colorPalette to randomize assignment
+  const shuffledPalette = [...colorPalette].sort(() => Math.random() - 0.5);
+  let assignedColor;
+  const isEye = shape.id.toLowerCase().includes("eye");
+  if (!isEye) {
+    if (index < shuffledPalette.length) {
+      // guarantee at least one of each color
+      assignedColor = shuffledPalette[index];
+    } else {
+      // after initial unique assignment, randomize from palette
+      assignedColor =
+        colorPalette[Math.floor(Math.random() * colorPalette.length)];
+    }
+  }
+
+  return {
+    ...shape,
+    defaultColor: isEye ? undefined : assignedColor,
+    initialX:
+      Math.random() * (window.innerWidth - shapeSize - padding * 2) +
+      padding +
+      shapeSize / 2,
+    initialY:
+      Math.random() * (window.innerHeight - shapeSize - padding * 2) +
+      padding +
+      shapeSize / 2,
+    initialRotation: 0,
+  };
+});
 
 export default shapeList;

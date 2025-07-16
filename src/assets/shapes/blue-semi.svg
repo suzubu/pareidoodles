@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="65.462" height="129.406" viewBox="0 0 65.462 129.406">
   <g id="c" data-name="Layer 1">
-    <path d="M63.938,129.406C28.211,128.985-.416,99.676.005,63.938.425,28.211,29.734-.416,65.462.005l-1.523,129.401Z" fill="#003eed" events="visiblePainted" />
+    <path d="M63.938,129.406C28.211,128.985-.416,99.676.005,63.938.425,28.211,29.734-.416,65.462.005l-1.523,129.401Z" fill="currentColor" events="visiblePainted" />
   </g>
 </svg>
