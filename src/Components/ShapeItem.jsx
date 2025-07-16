@@ -74,8 +74,7 @@ export default function ShapeItem({
         position: "absolute",
         cursor: "grab",
         zIndex: zIndex,
-        scaleX: scaleX,
-        scaleY: scaleY,
+        // ✨ remove scaleX and scaleY here
         transformOrigin: "center",
       }}
       onPointerDown={(e) => {
@@ -100,24 +99,34 @@ export default function ShapeItem({
       onDragEnd={() => {
         const dx = x.get() - startXRef.current;
         const dy = y.get() - startYRef.current;
-
-        if (onMoveSelected) {
-          onMoveSelected(id, dx, dy, false);
-        }
+        if (onMoveSelected) onMoveSelected(id, dx, dy, false);
       }}
     >
+      {/* Shape content */}
       <motion.div
         className="shape-wrapper"
         style={{
           rotate: rotation,
+          scaleX: scaleX,
+          scaleY: scaleY,
           transformOrigin: "center",
         }}
       >
         {children}
       </motion.div>
 
+      {/* Controls: sibling to shape-wrapper, not inside it */}
       {showControls && (
-        <div ref={panelRef}>
+        <div
+          ref={panelRef}
+          className="shape-controls-container"
+          style={{
+            position: "absolute",
+            top: "-40px", // position above shape
+            left: "50%",
+            transform: "translateX(-50%)",
+          }}
+        >
           <ShapeControls
             currentColor={currentColor}
             onTransformSelected={onTransformSelected}

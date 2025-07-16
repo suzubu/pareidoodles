@@ -1,7 +1,6 @@
 // src/Components/ShapeControls.jsx
-import React, { useState } from "react";
+import React from "react";
 import ColorPickerMenu from "./ColorPickerMenu";
-// icons (use your existing imports)
 import {
   UilArrowCircleLeft,
   UilArrowCircleRight,
@@ -20,34 +19,33 @@ export default function ShapeControls({
   onColorChange,
   colorPalette,
 }) {
-
   return (
-    <div
-      className="shape-tools"
-      style={{
-        zIndex: 9999,
-        position: "absolute",
-        top: "-50px",
-        left: "0",
-        background: "black",
-        padding: "6px",
-        borderRadius: "6px",
-        display: "flex",
-        gap: "4px",
-        boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
-      }}
-    >
-      {/* Rotate & Scale */}
-      <button onClick={() => onTransformSelected("rotate", -15)}>
+    <div className="shape-tools">
+      {/* Rotate */}
+      <button
+        onClick={() => onTransformSelected("rotate", -5)}
+        title="Rotate Left"
+      >
         <UilArrowCircleLeft color="#f182f4" />
       </button>
-      <button onClick={() => onTransformSelected("rotate", 15)}>
+      <button
+        onClick={() => onTransformSelected("rotate", 5)}
+        title="Rotate Right"
+      >
         <UilArrowCircleRight color="#f182f4" />
       </button>
-      <button onClick={() => onTransformSelected("scale", 0.1)}>
+
+      {/* Scale */}
+      <button
+        onClick={() => onTransformSelected("scale", 0.1)}
+        title="Scale Up"
+      >
         <UilPlusCircle color="#f182f4" />
       </button>
-      <button onClick={() => onTransformSelected("scale", -0.1)}>
+      <button
+        onClick={() => onTransformSelected("scale", -0.1)}
+        title="Scale Down"
+      >
         <UilMinusCircle color="#f182f4" />
       </button>
 
@@ -64,6 +62,7 @@ export default function ShapeControls({
         <UilFlipV color="#f182f4" style={{ transform: "rotate(90deg)" }} />
       </button>
 
+      {/* Color Picker integrated as part of toolbar */}
       <ColorPickerMenu
         currentColor={currentColor}
         colorPalette={colorPalette}

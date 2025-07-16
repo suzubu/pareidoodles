@@ -33,7 +33,7 @@ const colorPalette = [
 ];
 
 const shapeList = [
-  // top
+  // bottom
   { id: "pinkRec", Component: PinkRec },
   { id: "redCirc", Component: RedCirc },
   { id: "wideEyes", Component: WideEyes },
@@ -54,7 +54,7 @@ const shapeList = [
   { id: "redRec", Component: RedRec },
   { id: "redTris", Component: RedTris },
   { id: "smallEye", Component: SmallEye },
-  // bottom
+  // top
   { id: "smallEyes", Component: SmallEyes },
   { id: "yellowTri", Component: YellowTri },
   { id: "wideEye", Component: WideEye },

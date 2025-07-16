@@ -9,6 +9,11 @@
   height: auto;
 }
 
+.shape-container.selected .shape-wrapper {
+  outline: 2px dashed #00f;
+  outline-offset: 4px;
+}
+
 .shape-tools {
   position: absolute;
   top: -30px;
@@ -18,8 +23,11 @@
   border-radius: 4px;
   padding: 4px;
   display: flex;
+  align-items: center;
   gap: 4px;
 }
+
+/* Generic button styles for toolbar icons */
 .shape-tools button {
   background: #222;
   border: none;
@@ -31,12 +39,67 @@
   align-items: center;
   justify-content: center;
 }
+
 .shape-tools button:hover {
   background: #666;
   border-radius: 4px;
 }
 
-.shape-container.selected .shape-wrapper {
-  outline: 2px dashed #00f;
-  outline-offset: 4px;
+/* Wrapper for color picker button and dropdown */
+.color-picker-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Color picker button styled like other toolbar buttons */
+.shape-tools .color-picker-button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 4px;
+  background: #222;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shape-tools .color-picker-button:hover {
+  background: #666;
+  border-radius: 4px;
+}
+
+/* Dropdown menu styling */
+.color-picker-menu {
+  position: absolute;
+  top: 100%;
+  margin: 6px;
+  width: 32px;
+  background: #222;
+  border: none;
+  border-radius: 4px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Swatch styles */
+.color-picker-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Inner fill for color picker button */
+.color-picker-inner {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
 }
