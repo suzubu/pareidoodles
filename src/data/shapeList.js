@@ -11,7 +11,7 @@ import { ReactComponent as GreenRec } from "../assets/shapes/green-rec.svg";
 import { ReactComponent as Green2 } from "../assets/shapes/green-shape2.svg";
 import { ReactComponent as GreenStar } from "../assets/shapes/green-star.svg";
 import { ReactComponent as PinkBlob } from "../assets/shapes/pink-blob.svg";
-import { ReactComponent as PinkSemi } from "../assets/shapes/pink-semi.svg";
+
 import { ReactComponent as PurpleBlob } from "../assets/shapes/purple-blob.svg";
 import { ReactComponent as PurpleTri } from "../assets/shapes/purple-triangle.svg";
 import { ReactComponent as RedRec } from "../assets/shapes/red-rec.svg";
@@ -19,7 +19,6 @@ import { ReactComponent as RedTris } from "../assets/shapes/red-triangles.svg";
 import { ReactComponent as SmallEye } from "../assets/shapes/small-eye.svg";
 import { ReactComponent as SmallEyes } from "../assets/shapes/small-eyes.svg";
 import { ReactComponent as WideEye } from "../assets/shapes/wide-eye.svg";
-import { ReactComponent as YellowSemi } from "../assets/shapes/yellow-semi.svg";
 import { ReactComponent as YellowTri } from "../assets/shapes/yellow-triangle.svg";
 
 // import {ReactComponent as } from "../assets/shapes/"
@@ -33,16 +32,14 @@ const colorPalette = [
   "#ffff11",
 ];
 
-const padding = 50;
-const shapeSize = 100;
-
 const shapeList = [
+  // top
   { id: "pinkRec", Component: PinkRec },
   { id: "redCirc", Component: RedCirc },
   { id: "wideEyes", Component: WideEyes },
-  { id: "wideEye", Component: WideEye },
   { id: "bluePent", Component: BluePent },
   { id: "green1", Component: Green1 },
+  // middle
   { id: "purpSq", Component: PurpSq },
   { id: "yellowStar", Component: YellowStar },
   { id: "blueSemi", Component: BlueSemi },
@@ -50,16 +47,17 @@ const shapeList = [
   { id: "greenRec", Component: GreenRec },
   { id: "green2", Component: Green2 },
   { id: "greenStar", Component: GreenStar },
+  // middle2
   { id: "pinkBlob", Component: PinkBlob },
-  // { id: "pinkSemi", Component: PinkSemi },
   { id: "purpleBlob", Component: PurpleBlob },
   { id: "purpleTri", Component: PurpleTri },
   { id: "redRec", Component: RedRec },
   { id: "redTris", Component: RedTris },
   { id: "smallEye", Component: SmallEye },
+  // bottom
   { id: "smallEyes", Component: SmallEyes },
-  // { id: "yellowSemi", Component: YellowSemi },
   { id: "yellowTri", Component: YellowTri },
+  { id: "wideEye", Component: WideEye },
 
   // add more shapes here…
 ].map((shape, index) => {
@@ -77,18 +75,9 @@ const shapeList = [
         colorPalette[Math.floor(Math.random() * colorPalette.length)];
     }
   }
-
   return {
     ...shape,
     defaultColor: isEye ? undefined : assignedColor,
-    initialX:
-      Math.random() * (window.innerWidth - shapeSize - padding * 2) +
-      padding +
-      shapeSize / 2,
-    initialY:
-      Math.random() * (window.innerHeight - shapeSize - padding * 2) +
-      padding +
-      shapeSize / 2,
     initialRotation: 0,
   };
 });

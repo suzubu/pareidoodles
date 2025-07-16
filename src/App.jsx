@@ -2,85 +2,15 @@ import { useState, useRef } from "react";
 import shapeList from "./data/shapeList";
 import ShapeItem from "./Components/ShapeItem";
 import ScreenshotButton from "./Components/ScreenshotButton";
+import SelectionBox from "./Components/SelectionBox";
+import generateInitialShapes from "./utils/generateIntialShapes";
 import "./styles/App.css";
 
 function App() {
   // --- State Setup ---
-  const placedShapes = [];
-
-  function generateInitialShapes() {
-    const width = window.innerWidth;
-
-    let shapeWidth, shapeHeight, buffer, margin, scale;
-    if (width < 600) {
-      // Small screens
-      shapeWidth = 100;
-      shapeHeight = 100;
-      buffer = 50;
-      margin = 30;
-      scale = 0.5;
-    } else if (width < 1200) {
-      // Medium screens
-      shapeWidth = 120;
-      shapeHeight = 120;
-      buffer = 30;
-      margin = 25;
-      scale = 0.7;
-    } else {
-      // Large screens
-      shapeWidth = 150;
-      shapeHeight = 150;
-      buffer = 40;
-      margin = 20;
-      scale = 1;
-    }
-
-    function getRandomPosition() {
-      const x =
-        Math.random() * (window.innerWidth - shapeWidth - margin * 2) + margin;
-      const y =
-        Math.random() * (window.innerHeight / 2 - shapeHeight - margin * 2) +
-        window.innerHeight / 2 +
-        margin;
-      return { x, y };
-    }
-
-    function isOverlapping(x, y) {
-      return placedShapes.some((pos) => {
-        return !(
-          x + shapeWidth + buffer < pos.x ||
-          x > pos.x + shapeWidth + buffer ||
-          y + shapeHeight + buffer < pos.y ||
-          y > pos.y + shapeHeight + buffer
-        );
-      });
-    }
-
-    placedShapes.length = 0;
-
-    return shapeList.map((shape, index) => {
-      let pos;
-      let tries = 0;
-      do {
-        pos = getRandomPosition();
-        tries++;
-      } while (isOverlapping(pos.x, pos.y) && tries < 2000);
-      placedShapes.push(pos);
-
-      return {
-        ...shape,
-        initialX: pos.x,
-        initialY: pos.y,
-        zIndex: index,
-        rotation: 0,
-        scaleX: scale,
-        scaleY: scale,
-        color: shape.defaultColor || undefined,
-      };
-    });
-  }
-
-  const [shapeOrder, setShapeOrder] = useState(() => generateInitialShapes());
+  const [shapeOrder, setShapeOrder] = useState(() =>
+    generateInitialShapes(shapeList, window.innerWidth, window.innerHeight, 0.5)
+  );
   const [selectedIds, setSelectedIds] = useState([]);
   const [selectionBox, setSelectionBox] = useState(null);
   const [isSelecting, setIsSelecting] = useState(false);
@@ -309,15 +239,12 @@ function App() {
         ))}
 
         {selectionBox && (
-          <div
-            className="selection-box"
-            style={{
-              left: Math.min(selectionBox.startX, selectionBox.currentX),
-              top: Math.min(selectionBox.startY, selectionBox.currentY),
-              width: Math.abs(selectionBox.currentX - selectionBox.startX),
-              height: Math.abs(selectionBox.currentY - selectionBox.startY),
-            }}
-          ></div>
+          <SelectionBox
+            startX={selectionBox.startX}
+            startY={selectionBox.startY}
+            currentX={selectionBox.currentX}
+            currentY={selectionBox.currentY}
+          />
         )}
       </div>
     </div>
