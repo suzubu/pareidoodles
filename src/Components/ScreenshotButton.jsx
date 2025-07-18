@@ -1,3 +1,4 @@
+import "../styles/ScreenshotButton.css";
 import html2canvas from "html2canvas";
 
 export default function ScreenshotButton() {
@@ -25,21 +26,12 @@ export default function ScreenshotButton() {
   return (
     <button
       id="screenshot-button"
+      className="screenshot-button"
       onClick={captureScreenshot}
-      style={{
-        position: "absolute",
-        top: "10px",
-        right: "10px",
-        zIndex: 9999,
-        padding: "8px 12px",
-        background: "#444",
-        color: "#fff",
-        border: "none",
-        borderRadius: "10px",
-        cursor: "pointer",
-      }}
     >
-      📸 Take a Picture!
+      <span className="camera">📷 </span>
+      <span className="flash">📸 </span>
+      take a picture 
     </button>
   );
 }

@@ -33,7 +33,7 @@ export default function ColorPickerMenu({
               }}
             ></div>
           ))}
-        </div>
+        </div> 
       )}
     </div>
   );

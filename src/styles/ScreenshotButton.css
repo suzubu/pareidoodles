@@ -1,0 +1,40 @@
+@font-face {
+  font-family: "kalam";
+  src: url("/fonts/Kalam-Variable.woff2");
+}
+
+.screenshot-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 9999;
+  padding: 10px 20px;
+  font-family: "kalam";
+  font-size: 20px;
+  background: black;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+
+  cursor: pointer;
+}
+
+.screenshot-button:hover {
+  background: #666;
+}
+
+/* Default state: show camera, hide flash */
+.screenshot-button .camera {
+  display: inline;
+}
+.screenshot-button .flash {
+  display: none;
+}
+
+/* On hover: hide camera, show flash */
+.screenshot-button:hover .camera {
+  display: none;
+}
+.screenshot-button:hover .flash {
+  display: inline;
+}
