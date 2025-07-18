@@ -118,8 +118,10 @@ Made with ☕ + 🎧 by [suzubu](https://github.com/suzubu)
 
 ## 🪜 Next Steps
 
-- add more shapes
-- separate buttons/tool bar into components 
-  - add features to duplicate, flip, hide 
-  - add feature to choose shape + color/pattern
+- add more shapes ✅
+- separate buttons/tool bar into components ✅
+  - add features to duplicate, flip, hide ✅
+  - add feature to choose shape + color/pattern ✅
 - make tools/interface a bit cuter
+- add sound to when picture is taken
+- seo / sharing/ loading images/content 
