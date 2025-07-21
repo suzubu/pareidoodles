@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/App.css"; // or a separate CSS if you prefer
+import "../styles/App.css"; 
 
 export default function SelectionBox({ startX, startY, currentX, currentY }) {
   const left = Math.min(startX, currentX);

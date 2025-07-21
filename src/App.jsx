@@ -237,8 +237,18 @@ function App() {
             onColorChange={updateSelectedColor}
           >
             <shape.Component
-              className="shape-svg"
-              style={{ color: shape.color }}
+              className={`shape-svg ${
+                selectedIds.includes(shape.id) ? "shape-outline-active" : ""
+              }`}
+              style={{
+                color: shape.color,
+                stroke: selectedIds.includes(shape.id) ? "#00f" : "none",
+                strokeWidth: selectedIds.includes(shape.id) ? 2 : 0,
+                fill: selectedIds.includes(shape.id)
+                  ? shape.color
+                  : shape.color,
+                pointerEvents: "visiblePainted",
+              }}
             />
           </ShapeItem>
         ))}

@@ -7,11 +7,17 @@
   display: block;
   width: 100%;
   height: auto;
+  pointer-events: visiblePainted;
 }
 
-.shape-container.selected .shape-wrapper {
+/* .shape-container.selected .shape-wrapper {
   outline: 2px dashed #00f;
   outline-offset: 4px;
+} */
+
+.shape-outline {
+  position: absolute; /* optional if you wrap in a container */
+  pointer-events: none;
 }
 
 .shape-tools {

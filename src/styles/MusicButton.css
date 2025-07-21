@@ -3,6 +3,14 @@
   src: url("/fonts/Kalam-Variable.woff2");
 }
 
+.music-toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
 .music-switch {
   position: relative;
   display: inline-block;
@@ -45,19 +53,11 @@
 
 /* When checked */
 .music-switch input:checked + .slider {
-  background-color: #4caf50; /* green when on */
+  background-color: #003eed; /* green when on */
 }
 
 .music-switch input:checked + .slider::before {
   transform: translateX(22px); /* slide the knob */
-}
-
-.music-toggle-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-top: 10px;
-  margin-left: 10px;
 }
 
 .music-label {

@@ -123,9 +123,21 @@ Made with ☕ + 🎧 by [suzubu](https://github.com/suzubu)
   - add features to duplicate, flip, hide ✅
   - add feature to choose shape + color/pattern ✅
 - make tools/interface a bit cuter
-- add sound to when picture is taken
+- add sound to when picture is taken ✅
 - seo / sharing / loading images/content
 - add an intro page/about
 - simple shape creator? 
-- improve layering of shapes; grouping, deleting, having objects move from the new grouped center; ensuring flipped shapes register new orientation for degree changes 
+- improve layering of shapes; grouping, deleting, having objects move from the new grouped center; 
+- ensuring flipped shapes register new orientation for degree changes 
   - improve function on touch screen (ipad/iphone)
+- hold on buttons to rotate or scale ✅
+
+
+
+
+	1.	✅ Add sound to screenshot (easy, fun win).
+	2.	✅ Add About overlay (straightforward UI).
+	3.	💪 Improve z-index layering and add “bring forward.”
+	4.	💪 Handle flip+rotation alignment.
+	5.	💪 Add touch-friendly multi-select.
+	6.	💪 Implement share screenshot with Web Share API.
