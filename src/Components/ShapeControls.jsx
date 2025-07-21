@@ -1,5 +1,4 @@
-// src/Components/ShapeControls.jsx
-import React from "react";
+import React, { useRef } from "react";
 import ColorPickerMenu from "./ColorPickerMenu";
 import {
   UilArrowCircleLeft,
@@ -19,17 +18,43 @@ export default function ShapeControls({
   onColorChange,
   colorPalette,
 }) {
+  const pressIntervalRef = useRef(null);
+  const handlePress = (action, value) => {
+    // Perform the action once immediately
+    onTransformSelected(action, value);
+
+    // Start interval for continuous action
+    pressIntervalRef.current = setInterval(() => {
+      onTransformSelected(action, value);
+    }, 100); // adjust speed here (ms)
+  };
+
+  const stopPress = () => {
+    if (pressIntervalRef.current) {
+      clearInterval(pressIntervalRef.current);
+      pressIntervalRef.current = null;
+    }
+  };
   return (
     <div className="shape-tools">
       {/* Rotate */}
       <button
-        onClick={() => onTransformSelected("rotate", -5)}
+        onMouseDown={() => handlePress("rotate", -5)}
+        onMouseUp={stopPress}
+        onMouseLeave={stopPress}
+        onTouchStart={() => handlePress("rotate", -5)}
+        onTouchEnd={stopPress}
         title="Rotate Left"
       >
         <UilArrowCircleLeft color="#f182f4" />
       </button>
+
       <button
-        onClick={() => onTransformSelected("rotate", 5)}
+        onMouseDown={() => handlePress("rotate", 5)}
+        onMouseUp={stopPress}
+        onMouseLeave={stopPress}
+        onTouchStart={() => handlePress("rotate", 5)}
+        onTouchEnd={stopPress}
         title="Rotate Right"
       >
         <UilArrowCircleRight color="#f182f4" />
@@ -37,13 +62,21 @@ export default function ShapeControls({
 
       {/* Scale */}
       <button
-        onClick={() => onTransformSelected("scale", 0.1)}
+        onMouseDown={() => handlePress("scale", 0.1)}
+        onMouseUp={stopPress}
+        onMouseLeave={stopPress}
+        onTouchStart={() => handlePress("scale", 0.1)}
+        onTouchEnd={stopPress}
         title="Scale Up"
       >
         <UilPlusCircle color="#f182f4" />
       </button>
       <button
-        onClick={() => onTransformSelected("scale", -0.1)}
+        onMouseDown={() => handlePress("scale", -0.1)}
+        onMouseUp={stopPress}
+        onMouseLeave={stopPress}
+        onTouchStart={() => handlePress("scale", -0.1)}
+        onTouchEnd={stopPress}
         title="Scale Down"
       >
         <UilMinusCircle color="#f182f4" />
