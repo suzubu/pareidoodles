@@ -6,6 +6,7 @@ import SelectionBox from "./Components/SelectionBox";
 import generateInitialShapes from "./utils/generateIntialShapes";
 import "./styles/App.css";
 
+
 function App() {
   // --- State Setup ---
   const [shapeOrder, setShapeOrder] = useState(() =>
