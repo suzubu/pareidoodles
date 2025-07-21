@@ -4,8 +4,8 @@ import ShapeItem from "./Components/ShapeItem";
 import ScreenshotButton from "./Components/ScreenshotButton";
 import SelectionBox from "./Components/SelectionBox";
 import generateInitialShapes from "./utils/generateIntialShapes";
+import MusicToggle from "./Components/MusicToggle";
 import "./styles/App.css";
-
 
 function App() {
   // --- State Setup ---
@@ -203,7 +203,11 @@ function App() {
 
   return (
     <div className="outer-container">
-      <ScreenshotButton />
+      <div class="toolbar">
+        <MusicToggle />
+        <ScreenshotButton />
+      </div>
+
       <div
         className="App app-container"
         onMouseDown={handleMouseDown}

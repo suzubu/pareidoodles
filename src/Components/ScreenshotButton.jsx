@@ -1,10 +1,13 @@
 import "../styles/ScreenshotButton.css";
 import html2canvas from "html2canvas";
+const cameraAudio = new Audio("./sounds/pop.mp3");
 
 export default function ScreenshotButton() {
   const captureScreenshot = () => {
     const appElement = document.querySelector(".App");
     const buttonElement = document.getElementById("screenshot-button");
+    cameraAudio.currentTime = 0;
+    cameraAudio.play();
 
     if (appElement) {
       // Temporarily hide the button
@@ -31,7 +34,7 @@ export default function ScreenshotButton() {
     >
       <span className="camera">📷 </span>
       <span className="flash">📸 </span>
-      take a picture 
+      take a picture
     </button>
   );
 }

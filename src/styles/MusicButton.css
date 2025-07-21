@@ -1,0 +1,71 @@
+@font-face {
+  font-family: "kalam";
+  src: url("/fonts/Kalam-Variable.woff2");
+}
+
+.music-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px; /* overall width */
+  height: 28px; /* overall height */
+}
+
+/* Hide the default checkbox */
+.music-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider background */
+.music-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #666;
+  border-radius: 34px;
+  transition: background-color 0.3s;
+}
+
+/* The circle knob */
+.music-switch .slider::before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+/* When checked */
+.music-switch input:checked + .slider {
+  background-color: #4caf50; /* green when on */
+}
+
+.music-switch input:checked + .slider::before {
+  transform: translateX(22px); /* slide the knob */
+}
+
+.music-toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.music-label {
+  font-size: 24px;
+  font-family: "kalam";
+  color: #fff; /* or a color that matches your UI */
+  padding-top: 0; /* remove extra top padding */
+  margin-left: 0; /* ensure no extra margin */
+  user-select: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}

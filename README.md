@@ -124,5 +124,8 @@ Made with ☕ + 🎧 by [suzubu](https://github.com/suzubu)
   - add feature to choose shape + color/pattern ✅
 - make tools/interface a bit cuter
 - add sound to when picture is taken
-- seo / sharing/ loading images/content
-- improve laying of shapes; grouping, deleting, having objects move from the new grouped center; ensuring flipped shapes register new orientation for degree changes 
+- seo / sharing / loading images/content
+- add an intro page/about
+- simple shape creator? 
+- improve layering of shapes; grouping, deleting, having objects move from the new grouped center; ensuring flipped shapes register new orientation for degree changes 
+  - improve function on touch screen (ipad/iphone)

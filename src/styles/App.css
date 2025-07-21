@@ -17,3 +17,11 @@
   pointer-events: none;
   z-index: 9998;
 }
+
+.toolbar {
+  display: flex; /* Arrange children in a row */
+  align-items: center; /* Vertically align them */
+  gap: 8px; /* Space between buttons */
+  padding: 10px; /* Optional padding around toolbar */
+  flex-wrap: wrap; /* Allow wrapping on very small screens */
+}
