@@ -131,6 +131,7 @@ Made with ☕ + 🎧 by [suzubu](https://github.com/suzubu)
 - ensuring flipped shapes register new orientation for degree changes 
   - improve function on touch screen (ipad/iphone)
 - hold on buttons to rotate or scale ✅
+- remove color option from eyes 
 
 
 
