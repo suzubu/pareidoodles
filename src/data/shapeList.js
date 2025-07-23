@@ -19,7 +19,6 @@ import { ReactComponent as smallEye } from "../assets/shapes/small-eye.svg";
 import { ReactComponent as smallEyes } from "../assets/shapes/small-eyes.svg";
 import { ReactComponent as wideEye } from "../assets/shapes/wide-eye.svg";
 import { ReactComponent as tri2 } from "../assets/shapes/triangle2.svg";
-import { ReactComponent as testTri } from "../assets/shapes/test-triangle.svg";
 
 const colorPalette = [
   "#f182f4",
@@ -56,7 +55,6 @@ const shapeList = [
   { id: "smallEyes", Component: smallEyes },
   { id: "tri2", Component: tri2 },
   { id: "wideEye", Component: wideEye },
-  { id: "testTri", Component: testTri },
 
   // add more shapes here…
 ].map((shape, index) => {
