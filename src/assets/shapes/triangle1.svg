@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="56.955" height="100.332" viewBox="0 0 56.955 100.332">
   <g id="c" data-name="Layer 1">
-    <polygon points="56.955 100.332 0 99.661 22.878 0 56.955 100.332" fill="currentColor" events="visiblePainted" />
+    <polygon points="56.955 100.332 0 99.661 22.878 0 56.955 100.332" fill="currentColor" pointer-events="visiblePainted" />
   </g>
 </svg>
