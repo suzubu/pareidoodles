@@ -1,27 +1,25 @@
-# 🧲 Fridge Magnets
+# 🎨 Pareidoodles
 
-> A playful web app where you can drag, rotate, and scale shapes on a digital canvas — like making art with fridge magnets.
+> An experimental web app where playful, generative doodles emerge from patterns — inspired by pareidolia, the tendency to see shapes in randomness.
 
 ---
 
 ## 🖼 Preview
 
-![App Preview](media/preview.gif)
-
-*(Replace `media/preview.gif` with your actual path. GIFs should be compressed for GitHub.)*
+![App Preview](media/pareidoodles-preview.gif)
 
 ---
 
 ## ⚙️ Getting Started
 
-These steps will get you running locally:
+These instructions will get your project running locally.
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/yourname/fridge-magnets.git
+git clone https://github.com/suzubu/pareidoodles.git
 
 # 2. Navigate into the project folder
-cd fridge-magnets
+cd pareidoodles
 
 # 3. Install dependencies
 npm install
@@ -31,114 +29,83 @@ npm run dev
 ```
 
 > Built with:  
-> - [React](https://react.dev/)  
 > - [Vite](https://vitejs.dev/)  
-> - [Framer Motion](https://www.framer.com/motion/)  
-> - [Zustand](https://zustand-demo.pmnd.rs/) for state management  
-> - Plain CSS for styling
+> - [p5.js](https://p5js.org/)  
+> - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)  
+> - [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API) (for rendering experiments)
 
 ---
 
 ## ✨ Features
 
-- ✅ Drag shapes freely on the canvas  
-- 🔁 Rotate and scale shapes via control panel  
-- 📦 Multi‑select shapes to move or transform them together  
-- 🎨 Randomize shape placement for playful layouts  
-- 📸 Capture a screenshot of your creation
+- 🎨 Generative doodles that play with randomness and perception  
+- 👁️ Inspired by pareidolia — seeing faces and shapes in patterns  
+- ⚡ Fast iteration powered by Vite  
+- 🌗 Modular structure for expanding creative experiments  
 
 ---
 
 ## 💡 Dev Notes
 
-- Used Framer Motion for smooth dragging and transform animations.  
-- Zustand handles global state for selections and z‑index management.  
-- Designed to be extended with more shapes and control features (duplicate, delete, color picker, etc.).
+- p5.js handles rendering and doodle generation  
+- Configurable parameters for doodle randomness  
+- Organized into `src/` and `public/` for clarity  
+- `media/` stores preview gifs and screenshots  
 
 ---
 
 ## 📚 Inspiration / Credits
 
-This project was inspired by:
-- Real‑life fridge magnets and playful creative tools
-- [Framer Motion examples](https://www.framer.com/motion/) for drag and animation
-- Community discussions on interactive UI patterns
+This project was inspired by:  
+
+- @marcellovelho
+- The concept of **pareidolia** in art and perception  
+- Generative art practices in the creative coding community  
+- Works from The Coding Train and Shadertoy  
 
 ---
 
 ## 🧪 Known Issues
 
-- ❌ No persistence yet: refreshing the page resets all shapes
-- 🔍 Z‑index logic may need refinement for very complex scenarios
+- ❌ Some doodles may appear repetitive depending on seed  
+- 🔍 Mobile rendering performance may vary  
 
 ---
 
 ## 🔭 Roadmap / TODO
 
-- [ ] Add duplicate and delete controls  
-- [ ] Allow custom SVG uploads  
-- [ ] Save/load layouts  
-- [ ] Enhance accessibility and keyboard controls
+- [ ] Add interactive controls for doodle generation  
+- [ ] Export doodles as images or GIFs  
+- [ ] Add color palettes and style themes  
+- [ ] Expand beyond 2D into light WebGL shaders  
 
 ---
 
 ## 📂 Folder Structure
 
 ```bash
-fridge-magnets/
-├── src/
-│   ├── App.jsx
-│   ├── Components/
-│   │   ├── ShapeItem.jsx
-│   │   ├── ShapeControls.jsx
-│   ├── data/
-│   │   └── shapeList.js
-│   ├── styles/
-│   │   ├── App.css
-│   │   └── ShapeItem.css
-│   └── main.jsx
-├── public/
-│   └── media/
-│       └── preview.gif
-└── README.md
+pareidoodles/
+    index.html
+    vite.config.js
+    public/
+    .gitignore
+    package-lock.json
+    package.json
+    eslint.config.js
+    .git/
+    media/
+    src/
+
 ```
 
 ---
 
 ## 📜 License
 
-Contact me please! 
+MIT — feel free to use and adapt!
 
 ---
 
 ## 🙋‍♀️ Author
 
-Made with ☕ + 🎧 by [suzubu](https://github.com/suzubu)
-
-
-## 🪜 Next Steps
-
-- add more shapes ✅
-- separate buttons/tool bar into components ✅
-  - add features to duplicate, flip, hide ✅
-  - add feature to choose shape + color/pattern ✅
-- make tools/interface a bit cuter
-- add sound to when picture is taken ✅
-- seo / sharing / loading images/content
-- add an intro page/about
-- simple shape creator? 
-- improve layering of shapes; grouping, deleting, having objects move from the new grouped center; 
-- ensuring flipped shapes register new orientation for degree changes 
-  - improve function on touch screen (ipad/iphone)
-- hold on buttons to rotate or scale ✅
-- remove color option from eyes 
-
-
-
-
-	1.	✅ Add sound to screenshot (easy, fun win).
-	2.	✅ Add About overlay (straightforward UI).
-	3.	💪 Improve z-index layering and add “bring forward.”
-	4.	💪 Handle flip+rotation alignment.
-	5.	💪 Add touch-friendly multi-select.
-	6.	💪 Implement share screenshot with Web Share API.
+Made with ☕ + 🎧 by [suzubu](https://github.com/suzubu)  
